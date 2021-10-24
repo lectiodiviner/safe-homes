@@ -29,10 +29,9 @@
 		    {{case.title}}
 
 			<div>
-				<i class="fas fa-tag"></i>
-					<ul>
+				<ul>
 					{% for tag in case.tags.all %}
-						<li>키워드: {{ tag.name }}</li>
+						<small>{{ tag.name }}</small>
 					{% endfor %}
 				</ul>
 			</div>
