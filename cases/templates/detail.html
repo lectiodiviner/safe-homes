@@ -1,0 +1,78 @@
+{% load static %}	
+
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"/>
+	<title>세이프홈즈</title>
+	<link href="{% static 'css/default.css' %}" rel="stylesheet">
+
+	<link rel="canonical" href="url넣기" />
+	<link rel="stylesheet" href="css/reset.css">
+</head>
+
+<body>
+
+<div id="wrap">
+
+	<div class="visual">
+		<div class="back b">
+			<a href="{% url 'list' %}" class="">뒤로가기</a>
+		</div>
+
+		<div class="thumnail">
+				{% comment %} <img src="{{case.thumbnail_image.url}}">  {% endcomment %}
+		</div>
+
+		<div class="title">
+		    {{case.title}}
+
+			<div>
+				<i class="fas fa-tag"></i>
+				{{ case }}
+			</div>
+			{% comment %} <small>키워드1</small> {% endcomment %}
+		</div>
+	</div>
+	
+	<div class="content">
+		<div class="ct02 mt2">
+			
+			<div class="group mt4">
+				{% comment %} {% if case.center_image.url = none %} {% endcomment %}
+				<img src="{{case.center_image.url}}"> 
+				{{case.contents_text}}
+			</div>
+			
+				<div class="profile mt4">
+					<div class="img">
+				</div>
+				<div class="detail">
+					<div class="name">정동훈 공인중개사</div>
+					<p>정직한 중개시장을 위해 항상 노력합니다.</p>
+					<div class="etc mt2">010-1234-5678 | jdh123@safehomes.kr</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+{% load static %}	
+
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"/>
+	<title>세이프홈즈</title>
+	<link rel="canonical" href="url넣기" />
+<!-- CSS only -->
+<link href="{% static 'css/default.css' %}" rel="stylesheet">
+<link href="{% static 'css/reset.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+
+<div id="wrap">
+
+	<div class="etc">
+		<ul>
+			<li class="ticket"><a href="#"><i><img src="{% static 'img/ticket_icon.png' %}"></i><span class="sound">티켓</span></a></li>
+			<li class="ticket on"><a href="#"><i><img src="{% static 'img/ticket_icon.png' %}"></i><span class="sound">티켓</span></a></li>
+			<li class="notice"><a href="#"><i><img src="{% static 'img/notice_icon.png' %}"></i><span class="sound">알림</span></a></li>
+		</ul>
+	</div>
+
+	<div class="comment mt4">
+		집 구할때</br>
+		<span>어떤 일</span>이 일어나고 있나요?
+	</div>
+	
+	<div class="link_box mt4 b">
+		<form>
+		{% for case in case_all %}
+			
+			<li class=""><a href="{% url 'list' %}">{{case.keyword1}}</a></li>
+
+		{% endfor %}
+
+			{% comment %} <li class=""><a href="">{{case.keyword1}}</a></li>
+			<li class=""><a href="">{{case.keyword1}}</a></li> {% endcomment %}
+	</div>
+
+	
+	{% for case in case_all %}
+	<div class="content">
+		<div class="ct01">
+			<div class="group">
+				<div class="mt3">
+					<a href="{% url 'detail' case.id %}">
+					<div class="img"> 
+						<img class="" src="{{case.thumbnail_image.url}}"> 
+					</div>
+					<div class="txt"> {{case.title}} <br>
+					<small>{{case.keyword1}}</small></div>
+					<br>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+
+</div>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
