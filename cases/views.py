@@ -19,6 +19,20 @@ def detail(request, id): # list의 case detail을 요청하기 위한 함수
     print('case',case)
     return render(request, "detail.html", context) # 요청에 대한 응답
 
+class TagCloudTV(TemplateView):
+    template_name = 'taggit/taggit_cloud.html'
+
+class TaggedObjectLV(ListView):
+    template_name = 'taggit/taggit_post_list.html'
+    model = Case
+
+    def get_queryset(self):
+        return Case.objects.filter(tags_name=self.kwargs.get('tag'))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tagname'] = self.kwargs['tag']
+        return context
 
 
 # def filter(request, keyword1):

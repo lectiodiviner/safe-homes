@@ -30,7 +30,11 @@
 
 			<div>
 				<i class="fas fa-tag"></i>
-				{{ case }}
+					<ul>
+					{% for tag in case.tags.all %}
+						<li>키워드: {{ tag.name }}</li>
+					{% endfor %}
+				</ul>
 			</div>
 			{% comment %} <small>키워드1</small> {% endcomment %}
 		</div>
