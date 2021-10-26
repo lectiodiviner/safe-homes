@@ -26,21 +26,14 @@
 	</div>
 
 	<div class="comment mt4">
-		집 구할때</br>
-		<span>어떤 일</span>이 일어나고 있나요?
+		집 구할때</br><span>어떤 일</span>이 일어나고 있나요?
 	</div>
-	
-	<div class="link_box mt4 b">
-		<form>
-		{% for case in case_all %}
-			
-			<li class=""><a href="{% url 'list' %}">{{case.keyword1}}</a></li>
-
-		{% endfor %}
-
-			{% comment %} <li class=""><a href="">{{case.keyword1}}</a></li>
-			<li class=""><a href="">{{case.keyword1}}</a></li> {% endcomment %}
-	</div>
+		<div class="link_box mt4 b">
+			Test
+			{% for tag in case.tags.all %}
+						<small>{{ tag.name }}</small>
+			{% endfor %}
+		</div>
 
 	
 	{% for case in case_all %}
