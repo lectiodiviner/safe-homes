@@ -1767,7 +1767,7 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
 /*content02*/
 @media screen and (min-width:0px){
 	.visual{
-		 background:url('../img/home05.png') no-repeat; background-size:cover; padding:3vw;
+		 background:url('{% case.thumbnail_image.url %}') no-repeat; background-size:cover; padding:3vw;
 	}
 	.back.b a{
 		background:url('../img/back_icon02.png') no-repeat;

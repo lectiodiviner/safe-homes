@@ -44,6 +44,13 @@ class Case(models.Model):
     
     def __str__(self):
         return '%s-%s' % (self.title, self.tags)
+
+    class Tags(models.Model):
+        title = models.CharField('title', max_length=30)
+        tags = TaggableManager()
+
+        def __str__(self):
+            return self.title
     # tag = models.ManyToManyField('tag.Tag', verbose_name= "태그")
 
 
@@ -59,7 +66,3 @@ class Case(models.Model):
 # def __str__(self):
 #     return self.name
 
-# class Meta:
-#     db_table = "community_tag"
-#     verbose_name = "태그"
-#     verbose_name_plural = "태그"

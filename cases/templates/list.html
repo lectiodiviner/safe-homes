@@ -29,13 +29,13 @@
 		집 구할때</br><span>어떤 일</span>이 일어나고 있나요?
 	</div>
 		<div class="link_box mt4 b">
-			Test
-			{% for tag in case.tags.all %}
-						<small>{{ tag.name }}</small>
+			<small> 모두 </small>
+			{% for tag in tag_all %}
+				<small>{{ tag.name }}</small>
 			{% endfor %}
 		</div>
 
-	
+	{% for tag in tag_all %}
 	{% for case in case_all %}
 	<div class="content">
 		<div class="ct01">
@@ -46,7 +46,7 @@
 						<img class="" src="{{case.thumbnail_image.url}}"> 
 					</div>
 					<div class="txt"> {{case.title}} <br>
-					<small>{{case.keyword1}}</small></div>
+						<small>{{ tag }}</small>
 					<br>
 					</a>
 				</div>
@@ -54,6 +54,8 @@
 		</div>
 	</div>
 	{% endfor %}
+	{% endfor %}
+
 
 </div>
 
