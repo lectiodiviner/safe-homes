@@ -12,10 +12,9 @@
 <link href="{% static 'css/reset.css' %}" rel="stylesheet">
 
 </head>
+
 <body>
-
-
-<div id="wrap">
+	<div id="wrap">
 
 	<div class="etc">
 		<ul>
@@ -28,37 +27,44 @@
 	<div class="comment mt4">
 		집 구할때</br><span>어떤 일</span>이 일어나고 있나요?
 	</div>
-		<div class="link_box mt4 b">
-			<small> 모두 </small>
-			{% for tag in tag_all %}
-				<small>{{ tag.name }}</small>
-			{% endfor %}
+		<div class="link_box b">
+				<a href="{% url 'list' %}"><small> 모두 </small></a>
+				{% for tag in tag_all %} 
+				<form action="{% url 'filter' %}" method="GET">
+					{% csrf_token %}  {# CSRF 공격 방지를 위한 태그 추가 #}
+					<button name="tag" value="{{ tag.name }}">{{ tag.name }}</button>
+				</form>
+
+					<!-- <a href="{% url 'filter' %}"><small>{{ tag.name }}</small></a> -->
+				{% endfor %}
+
 		</div>
 
-	{% for tag in tag_all %}
 	{% for case in case_all %}
-	<div class="content">
-		<div class="ct01">
-			<div class="group">
-				<div class="mt3">
-					<a href="{% url 'detail' case.id %}">
-					<div class="img"> 
-						<img class="" src="{{case.thumbnail_image.url}}"> 
+			<div class="content">
+				<div class="ct01">
+					<div class="group">
+						<div class="mt3">
+							<a href="{% url 'detail' case.id %}">
+								<div class="img"> 
+									<img class="" src="{{case.thumbnail_image.url}}"> 
+								</div>
+								<div class="txt"> {{case.title}} <br>
+									{% for tag in case.tags.all %}
+										<small>{{tag.name}}	</small>
+									{% endfor %}
+								<br>
+							</a>
+						</div>
 					</div>
-					<div class="txt"> {{case.title}} <br>
-						<small>{{ tag }}</small>
-					<br>
-					</a>
 				</div>
 			</div>
-		</div>
+	
+		
+	{% endfor %}
+
+
 	</div>
-	{% endfor %}
-	{% endfor %}
-
-
-</div>
-
 
 </body>
 

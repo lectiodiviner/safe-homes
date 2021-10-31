@@ -9,13 +9,25 @@ from django.views.generic import ListView, DetailView,TemplateView
 
 # Create your views here.
 
-def list(request): # case list를 요청하기 위한 함수
+def filter(request):
     case_all = Case.objects.all()
     tag = Tag.objects.all()
-    
-    # if tag.id == tag.ob
-    # tag의 아이디와 Case의 아이디가 일치하는 경우에 그때 해당하는 tag.name 값을 가져온다. 그값을 context에 담아준다.
-    # tag_id = Tag.objects.all(id=Case.id)
+    context = {
+        'case_all': case_all,
+        'tag_all' : tag
+         }
+    return render(request, "filter.html", context) # 요청에 대한 응답
+
+    pass
+    #tag의 아이디를 받아서, 그 아이디와 연결되는 case의 아이디를 호출
+    #case의 아이디에 해당되는 case.title, thumbnail, tag만 호출
+
+
+def list(request): # case list를 요청하기 위한 함수
+    tag_name = request.GET['tag']
+    print(tag_name.text)
+    case_all = Case.objects.all()
+    tag = Tag.objects.all()
     context = {
         'case_all': case_all,
         'tag_all' : tag

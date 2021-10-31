@@ -19,14 +19,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from cases.views import list, detail
+from cases.views import list, detail, filter
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', list, name="list"),
     path('<int:id>/', detail, name="detail"),
-    path('cases/', include('cases.urls'))
+    path('cases/', include('cases.urls')),
+    path('filter/', filter, name="filter"),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
