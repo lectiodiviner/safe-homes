@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from taggit.managers import TaggableManager
-from taggit.models import Tag
-
+from taggit.models import Tag, TagBase, TaggedItem, TaggedItemBase, CommonGenericTaggedItemBase
 
 from .models import Case # Case model
 
@@ -10,11 +9,17 @@ from django.views.generic import ListView, DetailView,TemplateView
 # Create your views here.
 
 def filter(request):
-    case_all = Case.objects.all()
+    tag_name = request.GET['tag_name']
+    tag_base = Case.tags.get(name=tag_name)
+    # tag_id = tag_name.get()
+    case_all = Case.objects.filter(tags = tag_base)
+    
     tag = Tag.objects.all()
     context = {
         'case_all': case_all,
-        'tag_all' : tag
+        'tag_all' : tag,
+        'tag_name' : tag_name,
+        'tag_base' : tag_base
          }
     return render(request, "filter.html", context) # 요청에 대한 응답
 
@@ -24,8 +29,6 @@ def filter(request):
 
 
 def list(request): # case list를 요청하기 위한 함수
-    tag_name = request.GET['tag']
-    print(tag_name.text)
     case_all = Case.objects.all()
     tag = Tag.objects.all()
     context = {
@@ -36,8 +39,8 @@ def list(request): # case list를 요청하기 위한 함수
 
 def detail(request, id): # list의 case detail을 요청하기 위한 함수
     case = Case.objects.get(id=id) # Case 모델의 특정값을 조회하여 case 변수에 할당
-    context = {'case' : case} #응답을 위한 context 변수 생성
-    print('case',case)
+    context = {'case' : case
+         } #응답을 위한 context 변수 생성
     return render(request, "detail.html", context) # 요청에 대한 응답
 
 class TagCloudTV(TemplateView):

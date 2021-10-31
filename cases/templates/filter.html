@@ -1,19 +1,9 @@
+{% extends 'base.html' %}
+
 {% load static %}	
 
-<!doctype html>
-<html lang="ko">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"/>
-	<title>세이프홈즈</title>
-	<link rel="canonical" href="url넣기" />
-<!-- CSS only -->
-<link href="{% static 'css/default.css' %}" rel="stylesheet">
-<link href="{% static 'css/reset.css' %}" rel="stylesheet">
-
-</head>
-
-<body>
+{% block title %} 관련 사례 목록 {% endblock %}
+{% block content %}
 	<div id="wrap">
 
 	<div class="etc">
@@ -27,46 +17,43 @@
 	<div class="comment mt4">
 		집 구할때</br><span>어떤 일</span>이 일어나고 있나요?
 	</div>
-        {% comment %} 클릭시 태그에 해당하는 케이스만 출력되어야 함 {% endcomment %}
-		<div class="link_box b">
-				<a href="{% url 'list' %}"><small> 모두 </small></a>
-				{% for tag in tag_all %} 
-				{% comment %} <input type="submit" value="{{ tag.name }}"> {% endcomment %}
-                {% comment %} <small>{{ tag.name }}</small></input> {% endcomment %}
-			{% endfor %}
-		</div>
-    {% for tag in tag_name %}
-        {{tag}}
-    {% endfor %}
+    <div class="link_box b" >
+        <div style="float: left;">
+            <button type="button"  onclick="location.href='/'">
+            모두</button>
+        </div>
+        {% for tag in tag_all %} 
+        <div style="float: left;">
+            <form action="{% url 'filter' %}" method="GET" class="link_box b">
+                {% csrf_token %}  
+                <button name="tag_name" value="{{ tag.name }}">{{ tag.name }}</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
 
 	{% for case in case_all %}
-    {% if tag.id == case.id%}
-			<div class="content">
-				<div class="ct01">
-					<div class="group">
-						<div class="mt3">
-							<a href="{% url 'detail' case.id %}">
-								<div class="img"> 
-									<img class="" src="{{case.thumbnail_image.url}}"> 
-								</div>
-								<div class="txt"> {{case.title}} <br>
-									{% for tag in case.tags.all %}
-										<small>{{tag.name}}	</small>
-									{% endfor %}
-								<br>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-	{% endif %}
-		
-	{% endfor %}
-
-
-	</div>
-
-</body>
-
-
-</html>
+        <div class="content">
+            <div class="ct01">
+                <div class="group">
+                    <div class="mt3">
+                        <a href="{% url 'detail' case.id %}">
+                            <div class="img"> 
+                                <img class="" src="{{case.thumbnail_image.url}}"> 
+                            </div>
+                            <div class="txt"> {{case.title}} <br>
+                                    {% for tag in case.tags.all %}
+                                    <small>{{tag.name}}	</small>
+                                    {% endfor %}
+                                    <br>
+                            </a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+    {% endfor %}
+{% endblock %}

@@ -1767,16 +1767,32 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
 /*content02*/
 @media screen and (min-width:0px){
 	.visual{
-		 background:url('{% case.thumbnail_image.url %}') no-repeat; background-size:cover; padding:3vw;
+		padding:3vw; position:relative; max-height: 15%;
 	}
-	.back.b a{
-		background:url('../img/back_icon02.png') no-repeat;
+	.back.b{
+		position: absolute;	background:url('../img/back_icon02.png') no-repeat;
 	}
-	.visual .title{
-		color:#fff; font-size:4vw; margin-top:10vh;
+
+	.image-box {
+        width:100%;
+        height:150px;
+        overflow:hidden;
+        margin:0 auto;
+    }
+
+    .image-thumbnail {
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        position: relative;
+
+    }
+
+	.title{
+		position: absolute; color:#fff; font-size:4vw; top: 50px;
 	}
-	.visual .title small{
-		color:#fff; font-size:3vw; display:block;
+	.title small{
+		position: absolute;	color:#fff; font-size:2vw; display:block; 
 	}
 	.ct02 .group{
 		font-size:4.5vw;
@@ -1810,9 +1826,9 @@ body{ -ms-overflow-style: none; } ::-webkit-scrollbar { display: none; }
 }
 
 @media screen and (min-width:600px){
-	.visual{padding:20px;}
+	.visual{padding:0px;}
 	.visual .title{font-size:24px;}
-	.visual .title small{font-size:18px;}
+	.visual .title small{font-size:1px;}
 	.ct02 .group{font-size:22px;}
 	.ct02 .group p{font-size:15px;}
 	.ct02 .profile{padding:40px 0;}
