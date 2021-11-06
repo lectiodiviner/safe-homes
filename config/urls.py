@@ -28,7 +28,11 @@ urlpatterns = [
     path('<int:id>/', detail, name="detail"),
     path('cases/', include('cases.urls')),
     path('filter/', filter, name="filter"),
+    path('summernote/', include('django_summernote.urls')),
 
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -39,6 +39,8 @@ def list(request): # case list를 요청하기 위한 함수
 
 def detail(request, id): # list의 case detail을 요청하기 위한 함수
     case = Case.objects.get(id=id) # Case 모델의 특정값을 조회하여 case 변수에 할당
+    print(case.contents_text)
+    
     context = {'case' : case
          } #응답을 위한 context 변수 생성
     return render(request, "detail.html", context) # 요청에 대한 응답

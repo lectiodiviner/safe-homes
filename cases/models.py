@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 from taggit.managers import TaggableManager
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -13,15 +14,17 @@ class Case(models.Model):
     )
 
     thumbnail_image = models.ImageField(
-        upload_to='images/',blank=True, null=True
+        upload_to='images/', blank=True, null=True
     )
 
     center_image = models.ImageField(
-        upload_to='images/',blank=True, null=True
-)
+        upload_to='images/', blank=True, null=True
+    )
 
-    contents_text = models.TextField(
-        verbose_name='본문'
+    contents_text = RichTextField(
+        verbose_name='본문',
+        default=True,
+        null=True
     )
 
     created_at = models.DateTimeField(
@@ -38,7 +41,11 @@ class Case(models.Model):
         default=True
     )
 
-   
+    description = RichTextField(
+        default=True,
+        null=True
+    )
+
     modify_dt = models.DateTimeField('MODIFY DATE', auto_now=True)
     tags = TaggableManager()
     
