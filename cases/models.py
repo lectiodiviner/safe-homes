@@ -17,10 +17,6 @@ class Case(models.Model):
         upload_to='images/', blank=True, null=True
     )
 
-    center_image = models.ImageField(
-        upload_to='images/', blank=True, null=True
-    )
-
     contents_text = RichTextField(
         verbose_name='본문',
         default=True,
