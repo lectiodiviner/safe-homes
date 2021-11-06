@@ -41,11 +41,6 @@ class Case(models.Model):
         default=True
     )
 
-    description = RichTextField(
-        default=True,
-        null=True
-    )
-
     modify_dt = models.DateTimeField('MODIFY DATE', auto_now=True)
     tags = TaggableManager()
     
